@@ -1,7 +1,7 @@
 <template>
   <div class="loginWithGoogle">
     <b-button variant="primary" @click.prevent="onSigninGoogle" class="google">Login with
-      <b-img src="../../assets/google.png"/>>oogle
+      <img src="../../assets/google.png">oogle
     </b-button>
   </div>
 </template>

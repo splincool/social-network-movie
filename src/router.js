@@ -13,11 +13,13 @@ export default new Router({
     },
     {
       path: '/profile',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      name: 'profile',
       component: () => import(/* webpackChunkName: "about" */ './views/profile.vue')
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import(/* webpackChunkName: "about" */ './views/authUser.vue')
     },
     {
       path: '/about',

@@ -29,7 +29,7 @@
 export default {
   data () {
     return {
-      defaultPhoto: true
+      defaultPhoto: false
     }
   },
   computed: {
@@ -39,18 +39,17 @@ export default {
   },
   watch: {
     user (value) {
-      if (value === null || value === undefined) {
+      if (value) {
         this.$router.push('*')
       } else {
       }
-    },
-    photo () {
-      debugger
-      if (this.user.photoURL !== null && this.user.photoURL !== undefined) {
-        this.defaultPhoto = false
-      } else {
-        this.defaultPhoto = true
-      }
+    }
+  },
+  created () {
+    if (this.user.photoURL) {
+      this.defaultPhoto = false
+    } else {
+      this.defaultPhoto = true
     }
   }
 }
