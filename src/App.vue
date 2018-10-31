@@ -8,6 +8,15 @@
   </div>
 </template>
 
+<script>
+import authUser from './views/authUser.vue'
+export default {
+  components: {
+    authUser
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
