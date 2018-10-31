@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-form class="mb-4">
-       <b-form-group class='col' label="Signin">
-      <b-form-input
+      <b-form-group class='col' label="Signin">
+        <b-form-input
         class="mb-2"
         name="email"
         label="Email"
@@ -10,7 +10,7 @@
         type="email"
         placeholder="Your email"
         required/>
-      <b-form-input
+        <b-form-input
         class="mb-2"
         name="password"
         label="Password"
@@ -18,7 +18,7 @@
         type="password"
         placeholder="Your password"
         required/>
-       </b-form-group>
+      </b-form-group>
       <b-button class="mr-1" @click="onSignin" variant="primary">Login</b-button>
       <b-button type="reset" @click="resetForm" variant="danger">Reset</b-button>
     </b-form>

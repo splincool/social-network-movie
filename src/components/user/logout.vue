@@ -1,6 +1,6 @@
 <template>
   <div class="logout">
-    <img src='../../assets/logout.png' alt="logout" id="logout" @click="logout">
+    <b-button @click="logout">logout</b-button>
   </div>
 </template>
 

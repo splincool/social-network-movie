@@ -1,13 +1,15 @@
 <template>
-<b-container>
-  <b-row>
-<b-col><signin/></b-col>
-<b-col>
-<signup/>
-<loginWithGoogle class="mt-4"/>
-</b-col>
-</b-row>
-</b-container>
+  <b-container>
+    <b-row>
+      <b-col>
+        <signin/>
+      </b-col>
+      <b-col>
+        <signup/>
+        <loginWithGoogle class="mt-4"/>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

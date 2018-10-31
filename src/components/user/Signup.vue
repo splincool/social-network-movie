@@ -1,7 +1,7 @@
 <template>
   <b-form>
-     <b-form-group class='col' label="Signup">
-    <b-form-input
+    <b-form-group class='col' label="Signup">
+      <b-form-input
       name="email"
       label="Email"
       class="mb-2"
@@ -10,7 +10,7 @@
       type="email"
       placeholder="Enter email"
       required/>
-    <b-form-input
+      <b-form-input
       name="password"
       class="mb-2"
       id="password"
@@ -19,15 +19,15 @@
       placeholder="Enter password"
       required/>
       <b-form-input
-        name="confirmPassword"
-        class="mb-2"
-        label="Confirm Password"
-        placeholder="Confirm Password"
-        id="confirmPassword"
-        v-model="confirmPassword"
-        type="password"
-        :rules="[comparePasswords]"/>
-           <b-form-input
+      name="confirmPassword"
+      class="mb-2"
+      label="Confirm Password"
+      placeholder="Confirm Password"
+      id="confirmPassword"
+      v-model="confirmPassword"
+      type="password"
+      :rules="[comparePasswords]"/>
+      <b-form-input
       name="text"
       id="userName"
       v-model="userName"
@@ -35,10 +35,10 @@
       type="text"
       placeholder="Enter Name"
       required/>
-      </b-form-group>
-      <b-button @click="onSignup" variant="primary" class="mr-1">Submit</b-button>
-      <b-button type="reset" @click="resetForm" variant="danger">Reset</b-button>
-    </b-form>
+    </b-form-group>
+    <b-button @click="onSignup" variant="primary" class="mr-1">Submit</b-button>
+    <b-button type="reset" @click="resetForm" variant="danger">Reset</b-button>
+  </b-form>
 </template>
 
 <script>
