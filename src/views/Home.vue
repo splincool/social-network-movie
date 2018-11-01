@@ -12,7 +12,7 @@
     </b-row>
     <b-row>
       <b-col md="3"
-        v-for="movie in movies" 
+        v-for="movie in movies"
         :key="movie.id">
         <b-card :title="movie.name"
           :img-src="movie.image.medium"
