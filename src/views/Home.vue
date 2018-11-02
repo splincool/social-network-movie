@@ -20,7 +20,8 @@
           img-top
           tag="article"
           style="max-width: 20rem;"
-          class="mb-2">
+          class="mb-2"
+          @click="movieRouter(movie.id)">
         </b-card>
       </b-col>
     </b-row>
@@ -28,13 +29,11 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'home',
   data () {
     return {
-      movies: [],
       currentPage: 1
     }
   },
@@ -46,16 +45,17 @@ export default {
       this.getMovies()
     }
   },
+  computed: {
+    movies () {
+      return this.$store.getters.movies
+    }
+  },
   methods: {
     getMovies () {
-      axios.get(`http://api.tvmaze.com/shows?page=${this.currentPage - 1}`)
-        .then(response => {
-          console.log(response)
-          this.movies = response.data
-        })
-        .catch(e => {
-          console.log(e)
-        })
+      this.$store.dispatch('getMovies', `shows?page=${this.currentPage - 1}`)
+    },
+    movieRouter (id) {
+      this.$router.push('movie/' + id)
     }
   }
 }

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -11,11 +12,15 @@ export default new Vuex.Store({
     error: null,
     photoURL: null,
     progress: null,
-    progressShow: false
+    progressShow: false,
+    movies: null
   },
   getters: {
     user (state) {
       return state.user
+    },
+    movies (state) {
+      return state.movies
     },
     loading (state) {
       return state.loading
@@ -36,6 +41,9 @@ export default new Vuex.Store({
     },
     setLoading (state, payload) {
       state.loading = payload
+    },
+    setMovies (state, payload) {
+      state.movies = payload
     },
     setError (state, payload) {
       state.error = payload
@@ -237,6 +245,17 @@ export default new Vuex.Store({
             )
         })
       })
+    },
+    getMovies ({ commit }, link) {
+      axios.get(`http://api.tvmaze.com/` + link)
+        .then(response => {
+          console.log(response)
+          commit('setMovies', response.data)
+        })
+        .catch(e => {
+          console.log(e)
+          commit('setError', e)
+        })
     }
   }
 })
