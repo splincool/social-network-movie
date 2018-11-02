@@ -1,7 +1,5 @@
 <template>
-  <div class="logout">
-    <b-button @click="logout">logout</b-button>
-  </div>
+    <b-dropdown-item @click="logout">logout</b-dropdown-item>
 </template>
 
 <script>

@@ -9,7 +9,9 @@ export default new Vuex.Store({
     user: null,
     loading: false,
     error: null,
-    photoURL: null
+    photoURL: null,
+    progress: null,
+    progressShow: false
   },
   getters: {
     user (state) {
@@ -23,6 +25,9 @@ export default new Vuex.Store({
     },
     photoURL (state) {
       return state.photoURL
+    },
+    progress (state) {
+      return state.progress
     }
   },
   mutations: {
@@ -40,6 +45,12 @@ export default new Vuex.Store({
     },
     setURLPhoto (state, payload) {
       state.photoURL = payload
+    },
+    setProgress (state, payload) {
+      state.progress = payload
+    },
+    setProgressShow (state, payload) {
+      state.progressShow = payload
     }
   },
   actions: {
@@ -85,6 +96,7 @@ export default new Vuex.Store({
               email: user.email
             }
             commit('setUser', newUser)
+            window.location.reload()
           }
         )
         .catch(
@@ -185,7 +197,24 @@ export default new Vuex.Store({
         contentType: 'image/jpeg/png'
       }
       var uploadTask = storageRef.child(userID + '/' + fileName)
-      return uploadTask.put(file.photoURL, metadata).then(() => {
+      var uploadFile = uploadTask.put(file.photoURL, metadata)
+      uploadFile.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log('Upload is ' + progress + '% done')
+        commit('setProgress', progress)
+        commit('setProgressShow', true)
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused')
+            break
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running')
+            break
+        }
+      })
+      return uploadFile.then(() => {
         return uploadTask.getDownloadURL().then((downloadURL) => {
           console.log('File available at', downloadURL)
           commit('setURLPhoto', downloadURL)
@@ -195,31 +224,19 @@ export default new Vuex.Store({
           }).then(() => {
             // Update successful
             console.log('successful')
+            commit('setProgressShow', false)
             window.location.reload()
           })
             .catch(
               error => {
                 commit('setLoading', false)
                 commit('setError', error)
+                commit('setProgressShow', false)
                 console.log(error)
               }
             )
         })
       })
-      // uploadTask.on('state_changed', function (snapshot) {
-      //   // Observe state change events such as progress, pause, and resume
-      //   // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      //   var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      //   console.log('Upload is ' + progress + '% done')
-      //   switch (snapshot.state) {
-      //     case firebase.storage.TaskState.PAUSED: // or 'paused'
-      //       console.log('Upload is paused')
-      //       break
-      //     case firebase.storage.TaskState.RUNNING: // or 'running'
-      //       console.log('Upload is running')
-      //       break
-      //   }
-      // })
     }
   }
 })

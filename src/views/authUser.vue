@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="text-center">
     <b-row>
       <b-col>
         <signin/>

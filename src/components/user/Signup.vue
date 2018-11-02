@@ -1,5 +1,5 @@
 <template>
-  <b-form>
+  <b-form @keyup.enter="onSignup" class="text-center">
     <b-form-group class='col' label="Signup">
       <b-form-input
       name="email"

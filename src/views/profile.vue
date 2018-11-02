@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="text-center">
     <ProfileInfo/>
     <UpdateProfile v-if='update'/>
     <b-button

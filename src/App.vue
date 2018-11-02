@@ -1,23 +1,23 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
+  <b-container>
+    <NavBar class="mb-4"/>
     <router-view/>
-  </div>
+  </b-container>
 </template>
 
 <script>
-import authUser from './views/authUser.vue'
+import NavBar from '@/components/NavBar.vue'
 export default {
   components: {
-    authUser
+    NavBar
   }
 }
 </script>
 
 <style lang="scss">
+// переопределение цветов bootstrap
+// $primary: #63f5e9;
+@import "../node_modules/bootstrap/scss/bootstrap";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
