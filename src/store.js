@@ -247,11 +247,10 @@ export default new Vuex.Store({
       })
     },
     getMovies ({ commit }, link) {
-      axios.get(`http://api.tvmaze.com/` + link)
-        .then(response => {
-          console.log(response)
-          commit('setMovies', response.data)
-        })
+      return axios.get(`http://api.tvmaze.com/` + link).then(response => {
+        console.log(response)
+        commit('setMovies', response.data)
+      })
         .catch(e => {
           console.log(e)
           commit('setError', e)

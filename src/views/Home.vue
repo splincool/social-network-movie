@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container v-if="show">
     <b-row>
       <b-col>
           <b-pagination
@@ -34,7 +34,8 @@ export default {
   name: 'home',
   data () {
     return {
-      currentPage: 1
+      currentPage: 1,
+      show: false
     }
   },
   created () {
@@ -43,6 +44,13 @@ export default {
   watch: {
     currentPage () {
       this.getMovies()
+    },
+    movies (val) {
+      if (val) {
+        this.show = true
+      } else {
+
+      }
     }
   },
   computed: {

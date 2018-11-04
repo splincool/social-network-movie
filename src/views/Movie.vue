@@ -1,5 +1,5 @@
 <template>
-<b-container class="mb-4">
+<b-container v-if="show" class="mb-4">
   <b-row>
     <b-col cols="12" sm="4">
   <movieCard v-bind:movie="movie"/>
@@ -47,7 +47,8 @@ export default {
   data () {
     return {
       id: this.$route.params.id,
-      striped: true
+      striped: true,
+      show: false
     }
   },
   components: {
@@ -60,6 +61,16 @@ export default {
   computed: {
     movie () {
       return this.$store.state.movies
+    }
+  },
+  watch: {
+    movie (val) {
+      debugger
+      if (val) {
+        this.show = true
+      } else {
+
+      }
     }
   },
   methods: {
