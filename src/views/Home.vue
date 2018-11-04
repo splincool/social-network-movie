@@ -20,7 +20,7 @@
           img-top
           tag="article"
           style="max-width: 20rem;"
-          class="mb-2"
+          class="mb-2 poiner"
           @click="movieRouter(movie.id)">
         </b-card>
       </b-col>
@@ -60,3 +60,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.poiner {
+  cursor: pointer;
+}
+</style>

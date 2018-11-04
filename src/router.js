@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import movie from './views/Movie.vue'
 
 Vue.use(Router)
 
@@ -14,12 +15,12 @@ export default new Router({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import(/* webpackChunkName: "about" */ './views/profile.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/Profile.vue')
     },
     {
       path: '/auth',
       name: 'auth',
-      component: () => import(/* webpackChunkName: "about" */ './views/authUser.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/AuthUser.vue')
     },
     {
       path: '/about',
@@ -28,6 +29,11 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    },
+    {
+      path: '/movie/:id',
+      name: 'movie',
+      component: movie
     }
   ]
 })
