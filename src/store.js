@@ -13,7 +13,8 @@ export default new Vuex.Store({
     photoURL: null,
     progress: null,
     progressShow: false,
-    movies: null
+    movies: null,
+    searchValue: null
   },
   getters: {
     user (state) {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     progress (state) {
       return state.progress
+    },
+    searchValue (state) {
+      return state.searchValue
     }
   },
   mutations: {
@@ -59,6 +63,9 @@ export default new Vuex.Store({
     },
     setProgressShow (state, payload) {
       state.progressShow = payload
+    },
+    setSearchValue (state, payload) {
+      state.searchValue = payload
     }
   },
   actions: {

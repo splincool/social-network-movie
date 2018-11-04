@@ -60,8 +60,11 @@ export default {
   },
   methods: {
     searchMovie () {
-      var queryLink = `search/shows?q=${this.searchValue}`
-      this.$store.dispatch('getMovies', queryLink)
+      if (this.searchValue) {
+        this.$store.commit('setSearchValue', this.searchValue)
+        this.searchValue = ''
+        this.$router.push({ name: 'search' })
+      }
     }
   }
 }

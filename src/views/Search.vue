@@ -1,27 +1,17 @@
 <template>
-  <b-container>
-    <b-row>
-      <b-col>
-          <!-- <b-pagination
-            size="md"
-            :total-rows="100"
-            v-model="currentPage"
-            :per-page="10">
-          </b-pagination> -->
-      </b-col>
-    </b-row>
+  <b-container v-if="show">
     <b-row>
       <b-col md="3"
         v-for="movie in movies"
-        :key="movie.id">
-        <b-card :title="movie.name"
-          :img-src="movie.image.medium"
-          :img-alt="movie.name"
+        :key="movie.show.id">
+        <b-card :title="movie.show.name"
+          :img-src="coverImage(movie)"
+          :img-alt="movie.show.name"
           img-top
           tag="article"
           style="max-width: 20rem;"
           class="mb-2 poiner"
-          @click="movieRouter(movie.id)">
+          @click="movieRouter(movie.show.id)">
         </b-card>
       </b-col>
     </b-row>
@@ -34,15 +24,24 @@ export default {
   name: 'search',
   data () {
     return {
-      currentPage: 1
+      show: false
     }
   },
   created () {
     this.getMovies()
   },
   watch: {
-    currentPage () {
-      this.getMovies()
+    '$store.state.searchValue' (_val) {
+      if (_val) {
+        this.getMovies()
+      }
+    },
+    movies (val) {
+      if (val) {
+        this.show = true
+      } else {
+
+      }
     }
   },
   computed: {
@@ -52,10 +51,14 @@ export default {
   },
   methods: {
     getMovies () {
-      this.$store.dispatch('getMovies', `shows?page=${this.currentPage - 1}`)
+      var queryLink = `search/shows?q=${this.$store.getters.searchValue}`
+      this.$store.dispatch('getMovies', queryLink)
     },
     movieRouter (id) {
       this.$router.push('movie/' + id)
+    },
+    coverImage (movie) {
+      return movie.show.image ? movie.show.image.medium : ''
     }
   }
 }
