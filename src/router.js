@@ -34,6 +34,11 @@ export default new Router({
       path: '/movie/:id',
       name: 'movie',
       component: movie
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import(/* webpackChunkName: "about" */ './views/Search.vue')
     }
   ]
 })
