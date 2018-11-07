@@ -7,18 +7,21 @@
     @click="UpdateProfileUser">
     {{updateText}}
     </b-button>
+    <myMovies/>
   </b-container>
 </template>
 
 <script>
 import ProfileInfo from '../components/user/ProfileInfo.vue'
 import UpdateProfile from '../components/user/UpdateProfile.vue'
+import myMovies from '../components/myMovies.vue'
 
 export default {
   name: 'Profile',
   components: {
     ProfileInfo,
-    UpdateProfile
+    UpdateProfile,
+    myMovies
   },
   data () {
     return {

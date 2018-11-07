@@ -1,5 +1,7 @@
 <template>
-  <b-container v-if="show">
+<b-container class="text-center">
+   <img class="mt-6" v-if="loading" src="../assets/loading.gif" alt="loading..."/>
+  <b-container v-if="!loading" v-cloak>
     <b-row>
       <b-col>
           <b-pagination
@@ -20,11 +22,12 @@
           img-top
           tag="article"
           style="max-width: 20rem;"
-          class="mb-2 poiner"
+          class="mb-2 pointer"
           @click="movieRouter(movie.id)">
         </b-card>
       </b-col>
     </b-row>
+  </b-container>
   </b-container>
 </template>
 
@@ -34,8 +37,7 @@ export default {
   name: 'home',
   data () {
     return {
-      currentPage: 1,
-      show: false
+      currentPage: 1
     }
   },
   created () {
@@ -44,18 +46,14 @@ export default {
   watch: {
     currentPage () {
       this.getMovies()
-    },
-    movies (val) {
-      if (val) {
-        this.show = true
-      } else {
-
-      }
     }
   },
   computed: {
     movies () {
       return this.$store.getters.movies
+    },
+    loading () {
+      return this.$store.state.loading
     }
   },
   methods: {
@@ -68,9 +66,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.poiner {
-  cursor: pointer;
-}
-</style>

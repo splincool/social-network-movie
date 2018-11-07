@@ -14,7 +14,8 @@ export default new Vuex.Store({
     progress: null,
     progressShow: false,
     movies: null,
-    searchValue: null
+    searchValue: null,
+    myMovies: null
   },
   getters: {
     user (state) {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     searchValue (state) {
       return state.searchValue
+    },
+    setMyMovies (state) {
+      return state.myMovies
     }
   },
   mutations: {
@@ -48,6 +52,9 @@ export default new Vuex.Store({
     },
     setMovies (state, payload) {
       state.movies = payload
+    },
+    setMyMovies (state, payload) {
+      state.myMovies = payload
     },
     setError (state, payload) {
       state.error = payload
@@ -254,14 +261,65 @@ export default new Vuex.Store({
       })
     },
     getMovies ({ commit }, link) {
+      commit('setLoading', true)
       return axios.get(`http://api.tvmaze.com/` + link).then(response => {
         console.log(response)
         commit('setMovies', response.data)
+        commit('setLoading', false)
       })
         .catch(e => {
           console.log(e)
           commit('setError', e)
         })
+    },
+    addMyMovies ({ commit, state }, movie) {
+      var collection = firebase.firestore().collection(state.user.id).doc('myMovie')
+      collection.get().then((doc) => {
+        if (!doc.exists) {
+          collection.set({
+            [movie.id]: movie
+          })
+            .then(() => {
+              console.log('Document successfully written!')
+            })
+            .catch((error) => {
+              console.error('Error writing document: ', error)
+            })
+        } else {
+          collection.update({
+            [movie.id]: movie
+          })
+            .then(() => {
+              console.log('update!')
+            })
+            .catch((error) => {
+              console.error('Error writing document: ', error)
+            })
+        }
+      })
+        .catch(err => {
+          console.log('Error getting document', err)
+        })
+    },
+    getMyMovies ({ commit, state }) {
+      commit('setLoading', true)
+      return firebase.firestore().collection(state.user.id).doc('myMovie').get().then((doc) => {
+        if (doc.exists) {
+          commit('setMyMovies', doc.data())
+          commit('setLoading', false)
+        } else {
+          console.log('No such document!')
+          commit('setLoading', false)
+        }
+      }).catch((error) => {
+        console.log('Error getting document:', error)
+      })
+    },
+    deleteMyMovies ({ commit, state }, movie) {
+      var collection = firebase.firestore().collection(state.user.id).doc('myMovie')
+      collection.update({
+        [movie]: firebase.firestore.FieldValue.delete()
+      })
     }
   }
 })

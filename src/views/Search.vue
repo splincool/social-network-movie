@@ -1,4 +1,8 @@
 <template>
+<b-container>
+  <b-container class="text-center">
+   <img v-if="loading" src="../assets/loading.gif" alt="loading..."/>
+  </b-container>
   <b-container v-if="show">
     <b-row>
       <b-col md="3"
@@ -10,12 +14,13 @@
           img-top
           tag="article"
           style="max-width: 20rem;"
-          class="mb-2 poiner"
+          class="mb-2 pointer"
           @click="movieRouter(movie.show.id)">
         </b-card>
       </b-col>
     </b-row>
   </b-container>
+</b-container>
 </template>
 
 <script>
@@ -47,6 +52,9 @@ export default {
   computed: {
     movies () {
       return this.$store.getters.movies
+    },
+    loading () {
+      return this.$store.state.loading
     }
   },
   methods: {
@@ -65,7 +73,7 @@ export default {
 </script>
 
 <style>
-.poiner {
+.pointer {
   cursor: pointer;
 }
 </style>

@@ -6,7 +6,7 @@
     tag="article"
     style="max-width: 20rem;"
     class="mb-2">
-     <div slot="footer">
+    <div slot="footer">
         <small class="text-muted">Last updated {{dateConverter()}} </small>
     </div>
   </b-card>

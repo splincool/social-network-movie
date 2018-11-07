@@ -9,7 +9,7 @@
     </b-navbar-nav>
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
-      <b-nav-form>
+      <b-nav-form @keyup.enter="searchMovie">
         <b-form-input
           size="sm"
           class="mr-sm-2"

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container v-cloak>
     <NavBar class="mb-4"/>
     <router-view/>
   </b-container>
@@ -34,5 +34,8 @@ export default {
       color: #42b983;
     }
   }
+}
+.pointer {
+  cursor: pointer;
 }
 </style>
